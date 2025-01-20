@@ -1,6 +1,6 @@
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:FindFirstChildWhichIsA("Humanoid")
+local humanoid = character:WaitForChild("Humanoid")
 
 local bodyVelocity = Instance.new("BodyVelocity")
 bodyVelocity.Velocity = Vector3.new(0, 0, 0)
