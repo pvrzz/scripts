@@ -3,14 +3,12 @@ local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 
 local bodyVelocity = Instance.new("BodyVelocity")
-bodyVelocity.Velocity = Vector3.new(0, 0, 0)
 bodyVelocity.MaxForce = Vector3.new(100000, 100000, 100000)
-bodyVelocity.P = 1250
+bodyVelocity.Velocity = Vector3.new(0, 0, 0)
 
 function enableFly()
     bodyVelocity.Parent = character.PrimaryPart
     game:GetService("RunService").RenderStepped:Connect(function()
-        -- Set the velocity based on user input
         if humanoid and humanoid.MoveDirection ~= Vector3.new(0, 0, 0) then
             bodyVelocity.Velocity = humanoid.MoveDirection * 50
         else
