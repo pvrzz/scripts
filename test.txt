@@ -1,0 +1,33 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:FindFirstChildWhichIsA("Humanoid")
+
+local bodyVelocity = Instance.new("BodyVelocity")
+bodyVelocity.Velocity = Vector3.new(0, 0, 0)
+bodyVelocity.MaxForce = Vector3.new(100000, 100000, 100000)
+bodyVelocity.P = 1250
+
+function enableFly()
+    bodyVelocity.Parent = character.PrimaryPart
+    game:GetService("RunService").RenderStepped:Connect(function()
+        -- Set the velocity based on user input
+        if humanoid and humanoid.MoveDirection ~= Vector3.new(0, 0, 0) then
+            bodyVelocity.Velocity = humanoid.MoveDirection * 50
+        else
+            bodyVelocity.Velocity = Vector3.new(0, 0, 0)
+        end
+    end)
+end
+
+function disableFly()
+    bodyVelocity.Parent = nil
+end
+
+local userInputService = game:GetService("UserInputService")
+userInputService.InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.E then
+        enableFly()
+    elseif input.KeyCode == Enum.KeyCode.Q then
+        disableFly()
+    end
+end)
