@@ -4,12 +4,11 @@ local humanoid = character:WaitForChild("Humanoid")
 
 local bodyVelocity = Instance.new("BodyVelocity")
 bodyVelocity.MaxForce = Vector3.new(100000, 100000, 100000)
-bodyVelocity.Velocity = Vector3.new(0, 0, 0)
 
 function enableFly()
     bodyVelocity.Parent = character.PrimaryPart
     game:GetService("RunService").RenderStepped:Connect(function()
-        if humanoid and humanoid.MoveDirection ~= Vector3.new(0, 0, 0) then
+        if humanoid.MoveDirection ~= Vector3.new(0, 0, 0) then
             bodyVelocity.Velocity = humanoid.MoveDirection * 50
         else
             bodyVelocity.Velocity = Vector3.new(0, 0, 0)
